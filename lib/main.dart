@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sellandhelp/views/login_view.dart';
+import 'package:sellandhelp/views/register_view.dart';
+import 'package:sellandhelp/views/verify_email_view.dart';
 import 'firebase_options.dart';
 
 
@@ -13,6 +16,11 @@ void main() {
         primarySwatch: Colors.green,
       ),
       home: const HomePage(),
+      routes: {
+        "/login/":(context) => const LoginPage(),
+        "/register/":(context) => const RegisterPage(),
+        "/verification/":(context) => const VerifyEmailView(),
+      },
     ));
 }
 
@@ -34,17 +42,23 @@ class HomePage extends StatelessWidget {
            switch (snapshot.connectionState){
                 case ConnectionState.done:
                 final user = FirebaseAuth.instance.currentUser;
-                if (user?.emailVerified ?? false){
-                  print("You are a verified user");
+                if (user != null){
+                  if (user.emailVerified){
+                    print("Email is verified");
+                  }else{
+                    return const VerifyEmailView();
+                  }
                 }else{
-                  print("You are not verified");
+                  return const LoginPage();
                 }
-                return const Text("Done.");
+                return const Text("done");
+               
           default:
-          return const Text("Loading....");
+          return Scaffold(body: Center(child: const CircularProgressIndicator()));
             }
          },
         ),
     );
   }
 }
+
