@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>541325396976-0p6eoet12g6oospda7eulchjd57icjpg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.541325396976-0p6eoet12g6oospda7eulchjd57icjpg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBgOuXkJTU_KFdqD4_wBAXrsJ6MIZ7d0Dg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>541325396976</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>eg.cubes.sellandhelp</string>
+	<key>PROJECT_ID</key>
+	<string>sellandhelp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sellandhelp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:541325396976:ios:012974ebc2ebb63de42b35</string>
+</dict>
+</plist>

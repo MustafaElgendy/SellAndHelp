@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "541325396976",
+    "project_id": "sellandhelp",
+    "storage_bucket": "sellandhelp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541325396976:android:ddcd2365af0ea781e42b35",
+        "android_client_info": {
+          "package_name": "eg.cubes.sellandhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541325396976-jhe60qvaerg65dtdffttqlb6jtrrdid4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCibet51oDG6juoY1qKted-879xUiprmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541325396976-jhe60qvaerg65dtdffttqlb6jtrrdid4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
