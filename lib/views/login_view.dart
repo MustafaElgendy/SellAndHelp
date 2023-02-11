@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sellandhelp/firebase_options.dart';
+import 'dart:developer' as devtools show log;
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -67,6 +69,16 @@ class _LoginPageState extends State<LoginPage> {
                       print("Unknown!!!");
                     }else print(e.code);
                   }
+                  final user2 = FirebaseAuth.instance.currentUser;
+                  if (user2 != null){
+                  if (user2.emailVerified){
+                    Navigator.of(context).pushNamedAndRemoveUntil("/mainui/", (route) => false);
+                  }else{
+                    Navigator.of(context).pushNamedAndRemoveUntil("/verification/", (route) => false);
+                  }
+                }else{
+                  devtools.log("Erorr!!");
+                }
                   
                 },
                 child: const Text("Login"),
