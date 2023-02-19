@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:sellandhelp/firebase_options.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:sellandhelp/views/verify_email_view.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -59,14 +61,16 @@ class _LoginPageState extends State<LoginPage> {
                   try{
                     final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
                     email: email, password: password);
-                  print(user);
+
+                    devtools.log(user.toString());
+
                   }on FirebaseAuthException catch (e){
                     if (e.code == "user-not-found"){
-                      print("User not found");
+                      devtools.log("User not found");
                     }else if(e.code == "wrong-password"){
-                      print("Wrong password");
+                      devtools.log("Wrong password");
                     }else if(e.code == "unknown"){
-                      print("Unknown!!!");
+                     devtools.log("Unknown!!!");
                     }else print(e.code);
                   }
                   final user2 = FirebaseAuth.instance.currentUser;
@@ -74,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (user2.emailVerified){
                     Navigator.of(context).pushNamedAndRemoveUntil("/mainui/", (route) => false);
                   }else{
-                    Navigator.of(context).pushNamedAndRemoveUntil("/verification/", (route) => false);
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const VerifyEmailView()),);
                   }
                 }else{
                   devtools.log("Erorr!!");
