@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eg.cubes.sellandhelp">
    <application
-        android:label="Sell&amp;Help"
+        android:label="Sell'n Help"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

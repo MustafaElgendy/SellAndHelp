@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sellandhelp/constants/routes.dart';
 import 'package:sellandhelp/views/login_view.dart';
 import 'package:sellandhelp/views/register_view.dart';
 import 'package:sellandhelp/views/verify_email_view.dart';
@@ -17,11 +18,11 @@ void main() {
         primarySwatch: Colors.green,
       ),
       home: const HomePage(),
-      routes: {
-        "/login/":(context) => const LoginPage(),
-        "/register/":(context) => const RegisterPage(),
-        "/verification/":(context) => const VerifyEmailView(),
-        "/mainui/":(context) => const MainUI(),
+      routes: { 
+        LoginRoute:(context) => const LoginPage(),
+        RegisterRoute:(context) => const RegisterPage(),
+        VerifyRoute:(context) => const VerifyEmailView(),
+        MainUIRoute:(context) => const MainUI(),
       },
     ));
 }
@@ -41,6 +42,7 @@ class HomePage extends StatelessWidget {
            switch (snapshot.connectionState){
                 case ConnectionState.done:
                 final user = FirebaseAuth.instance.currentUser;
+                devtools.log(user.toString());
                 if (user != null){
                   if (user.emailVerified){
                     return const MainUI();
@@ -82,7 +84,7 @@ class _MainUIState extends State<MainUI> {
               final shouldLogOut = await showLogOutDialog(context);
               if(shouldLogOut){
                 await FirebaseAuth.instance.signOut();
-                Navigator.of(context).pushNamedAndRemoveUntil("/login/", (_) => false);
+                Navigator.of(context).pushNamedAndRemoveUntil(LoginRoute, (_) => false);
               }
             }
               
