@@ -23,7 +23,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                  Image.asset("assets/images/FLogo3.png",
                   height: 150.0,),
                   SizedBox(height: 16.0,),
-                  Text("Verify Your Email Now",
+                  Text("We have sent you an email verification",
                   style: TextStyle(color: Colors.green,fontSize: 30.0,fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10.0,),
@@ -49,7 +49,29 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                       await user?.sendEmailVerification();
                       Navigator.of(context).pushNamedAndRemoveUntil(LoginRoute, (route) => false);
                     }, 
-                    child: const Text("Send Verification"
+                    child: const Text("Re-send Verification"
+                    ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16.0),),
+                    ),
+                  ),
+                ),
+                Container(
+                   width: size.width * 0.8,
+                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                             gradient: LinearGradient(
+                              colors: <Color>[
+                                Color.fromARGB(255, 133, 240, 137),
+                                Color.fromARGB(255, 33, 139, 37),
+                              ]
+                              ),
+                        ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: TextButton(onPressed: ()async{
+                      await FirebaseAuth.instance.signOut();
+                      Navigator.of(context).pushNamedAndRemoveUntil(RegisterRoute, (route) => false);
+                    }, 
+                    child: const Text("Restart"
                     ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16.0),),
                     ),
                   ),

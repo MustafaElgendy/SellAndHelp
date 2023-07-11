@@ -144,7 +144,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               final user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
                               email: email, password: password);
                               devtools.log(user.toString());
-                              Navigator.of(context).pushNamedAndRemoveUntil(VerifyRoute, (route) => false);
+
+                              final currentUser = FirebaseAuth.instance.currentUser;
+                              await currentUser?.sendEmailVerification();
+                              Navigator.of(context).pushNamed(VerifyRoute);
                             } on FirebaseAuthException catch (e){
                               if(e.code == "weak-password"){
                                 await showErrorDialog(context, "Weak Password");
