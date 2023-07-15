@@ -1,7 +1,6 @@
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sellandhelp/constants/routes.dart';
+import 'package:sellandhelp/services/auth/auth_service.dart';
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({super.key});
@@ -45,8 +44,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: TextButton(onPressed: ()async{
-                      final user = FirebaseAuth.instance.currentUser;
-                      await user?.sendEmailVerification();
+                      AuthService.firebase().sendEmailVerification();
                       Navigator.of(context).pushNamedAndRemoveUntil(LoginRoute, (route) => false);
                     }, 
                     child: const Text("Re-send Verification"
@@ -54,6 +52,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                     ),
                   ),
                 ),
+                SizedBox(height: 10.0,),
                 Container(
                    width: size.width * 0.8,
                      decoration: BoxDecoration(
@@ -68,7 +67,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: TextButton(onPressed: ()async{
-                      await FirebaseAuth.instance.signOut();
+                      await AuthService.firebase().logOut();
                       Navigator.of(context).pushNamedAndRemoveUntil(RegisterRoute, (route) => false);
                     }, 
                     child: const Text("Restart"

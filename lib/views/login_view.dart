@@ -1,12 +1,9 @@
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sellandhelp/constants/routes.dart';
-import 'package:sellandhelp/firebase_options.dart';
+import 'package:sellandhelp/services/auth/auth_exception.dart';
+import 'package:sellandhelp/services/auth/auth_service.dart';
 import 'package:sellandhelp/utilities/show_error_dialog.dart';
-import 'dart:developer' as devtools show log;
-
 import 'package:sellandhelp/views/verify_email_view.dart';
 
 
@@ -118,29 +115,20 @@ class _LoginPageState extends State<LoginPage> {
                                   final email = _email.text;
                                   final password = _password.text;
                                   try{
-                                    final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                                    email: email, password: password);
-                                    devtools.log(user.toString());
-                                  }on FirebaseAuthException catch (e){
-                                    if (e.code == "user-not-found"){
-                                      await showErrorDialog(context, "User Not Found");
-                                    }else if(e.code == "wrong-password"){
-                                      await showErrorDialog(context, "Wrong password");
-                                    }else if(e.code == "unknown"){
-                                     await showErrorDialog(context, "Unknown User");
-                                    }else showErrorDialog(context, e.code.toString());
-                                    
-                                  }catch (e){
-                                    await showErrorDialog(context, e.toString());
-                                  }
-                                  final user2 = FirebaseAuth.instance.currentUser;
-                                  if (user2 != null){
-                                  if (user2.emailVerified){
-                                    Navigator.of(context).pushNamedAndRemoveUntil(MainUIRoute, (route) => false);
-                                  }else{
+                                    await AuthService.firebase().logIn(email: email, password: password);
+                                    final user = AuthService.firebase().currentUser; 
+                                    if(user?.isEmailVerified ?? false){
+                                      Navigator.of(context).pushNamedAndRemoveUntil(MainUIRoute, (route) => false);
+                                    }else{
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => const VerifyEmailView()),);
                                   }
-                                }
+                                  }on UserNotFoundAuthException{
+                                    await showErrorDialog(context, "User Not Found");
+                                  }on WrongPasswordFoundAuthException{
+                                    await showErrorDialog(context, "Wrong password");
+                                  }on GenericAuthException{
+                                    showErrorDialog(context, "Authentication Error");
+                                  }
                                 },
                                 child: const Text("Sign In",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16.0),),
                                 ),
