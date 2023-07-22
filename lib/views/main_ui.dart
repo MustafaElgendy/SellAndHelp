@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sellandhelp/constants/routes.dart';
 import 'package:sellandhelp/services/auth/auth_service.dart';
+import 'package:sellandhelp/views/intro_screen.dart';
 
-import '../enums/menu_action.dart';
 
 class MainUI extends StatefulWidget {
   const MainUI({super.key});
@@ -14,34 +14,7 @@ class MainUI extends StatefulWidget {
 class _MainUIState extends State<MainUI> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Main UI"),
-      actions: [
-        PopupMenuButton<MenuAction>(
-          onSelected: (value) async{
-            switch (value){
-              case MenuAction.logout:
-              final shouldLogOut = await showLogOutDialog(context);
-              if(shouldLogOut){
-                await AuthService.firebase().logOut();
-                Navigator.of(context).pushNamedAndRemoveUntil(LoginRoute, (_) => false);
-              }
-            }
-              
-            },
-          itemBuilder:(context) {
-            return const[
-              PopupMenuItem<MenuAction>(
-                value: MenuAction.logout,
-                child: Text("Log Out"))
-            ];
-          
-        },)
-      ],
-      ),
-      body: Center(child: const Text("Hello Customer",style: TextStyle(color: Colors.red,fontSize: 30.0
-      ,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),)),
-    );
+    return IntroScreen();
   }
 }
 
@@ -65,3 +38,37 @@ Future<bool> showLogOutDialog(BuildContext context){
   }
   ).then((value) => value ?? false);
 }
+
+
+
+
+
+
+// Scaffold(
+//       appBar: AppBar(title: const Text("Main UI"),
+//       actions: [
+//         PopupMenuButton<MenuAction>(
+//           onSelected: (value) async{
+//             switch (value){
+//               case MenuAction.logout:
+//               final shouldLogOut = await showLogOutDialog(context);
+//               if(shouldLogOut){
+//                 await AuthService.firebase().logOut();
+//                 Navigator.of(context).pushNamedAndRemoveUntil(LoginRoute, (_) => false);
+//               }
+//             }
+              
+//             },
+//           itemBuilder:(context) {
+//             return const[
+//               PopupMenuItem<MenuAction>(
+//                 value: MenuAction.logout,
+//                 child: Text("Log Out"))
+//             ];
+          
+//         },)
+//       ],
+//       ),
+//       body: Center(child: const Text("Hello Customer",style: TextStyle(color: Colors.red,fontSize: 30.0
+//       ,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),)),
+//     );

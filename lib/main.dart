@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sellandhelp/constants/routes.dart';
 import 'package:sellandhelp/services/auth/auth_service.dart';
+import 'package:sellandhelp/views/home_page.dart';
 import 'package:sellandhelp/views/login_view.dart';
 import 'package:sellandhelp/views/main_ui.dart';
 import 'package:sellandhelp/views/register_view.dart';
 import 'package:sellandhelp/views/verify_email_view.dart';
+
 import 'dart:developer' as devtools show log;
 
 
@@ -22,6 +24,7 @@ void main() {
         RegisterRoute:(context) => const RegisterPage(),
         VerifyRoute:(context) => const VerifyEmailView(),
         MainUIRoute:(context) => const MainUI(),
+        HomeScreenRoute:(context) => const HomeScreen(),
       },
     ));
 }
